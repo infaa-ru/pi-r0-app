@@ -1,0 +1,35 @@
+# EXPERIMENTAL (R0): committed by a human to infaa-ru/pi-r0-app (.github/workflows/pi-runner.yml). The only dispatch input is a launch id: it is
+# NOT a credential. The runner proves which workflow run it is with a GitHub OIDC token (audience pi-r0), asked for before anything else starts.
+# No secrets, no checkout, id-token: write only (the release asset is public, so the job needs no contents permission). The runner is one file pinned by its sha256.
+name: pi-runner (R0, experimental)
+on:
+  workflow_dispatch:
+    inputs:
+      launch:
+        description: PI launch id (not a secret)
+        required: true
+        type: string
+permissions:
+  id-token: write
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "22.x"
+      - name: Fetch the pinned pi-runner
+        env:
+          # Set both when the release is cut (docs: deploy/r0/README.md): the tag of the Release asset and the sha256 of pi-runner.mjs.
+          RUNNER_TAG: pi-runner-r0-08dcf95
+          RUNNER_SHA256: "0b893d3bab676426b6fa1fbf9f34d65c5f66c3076a6f4356e7cf213585a848db"
+        run: |
+          curl -fsSL -o pi-runner.mjs "https://github.com/infaa-ru/pi-r0-app/releases/download/${RUNNER_TAG}/pi-runner.mjs"
+          echo "${RUNNER_SHA256}  pi-runner.mjs" | sha256sum -c -
+      - name: Run one attempt
+        env:
+          # An Actions variable (not a secret), set by the owner for each session: the quick-tunnel URL changes.
+          PI_URL: ${{ vars.PI_R0_URL }}
+          PI_LAUNCH: ${{ inputs.launch }}
+        run: node pi-runner.mjs run --once --launch "$PI_LAUNCH" --url "$PI_URL" --oidc-audience pi-r0

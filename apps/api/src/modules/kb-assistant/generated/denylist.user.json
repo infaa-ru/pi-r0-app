@@ -1,0 +1,13 @@
+{
+  "patterns": [
+    "apps/",
+    "packages/",
+    "\\.tsx?\\b",
+    "KBC-(support|internal|restricted)-"
+  ],
+  "tokens": [
+    "/shops/:shopId/orders",
+    "orders.place",
+    "orders.view"
+  ]
+}

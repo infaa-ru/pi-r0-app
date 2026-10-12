@@ -1,0 +1,20 @@
+id: "shop.orders.order-place"
+type: capability
+part_of: "sub:shop.orders"
+title: { ru: "Place an order", en: "Place an order" }
+summary: "Create an order with a total."
+intents: ["place order"]
+status: live
+min_tier: user
+entitlements:
+  view: ["perm:orders.view"]
+  execute: ["perm:orders.place"]
+entry:
+  api:
+    - { op: "api:POST /shops/:shopId/orders", role: execute }
+relations:
+  produces:
+    - { to: "concept:shop.order" }
+agent:
+  actions:
+    - { kind: explain }

@@ -1,0 +1,43 @@
+{
+  "items": [
+    {
+      "calls": [],
+      "directPermissions": [
+        "orders.view"
+      ],
+      "files": [
+        "apps/api/src/orders/orders.routes.ts"
+      ],
+      "handler": {
+        "endLine": 3,
+        "file": "apps/api/src/orders/orders.routes.ts",
+        "line": 4
+      },
+      "hasSchema": false,
+      "id": "api:GET /shops/:shopId/orders",
+      "method": "GET",
+      "path": "/shops/:shopId/orders",
+      "prefix": "/api/v1"
+    },
+    {
+      "calls": [],
+      "directPermissions": [
+        "orders.place"
+      ],
+      "files": [
+        "apps/api/src/orders/orders.routes.ts"
+      ],
+      "handler": {
+        "endLine": 5,
+        "file": "apps/api/src/orders/orders.routes.ts",
+        "line": 5
+      },
+      "hasSchema": false,
+      "id": "api:POST /shops/:shopId/orders",
+      "method": "POST",
+      "path": "/shops/:shopId/orders",
+      "prefix": "/api/v1"
+    }
+  ],
+  "kind": "api"
+}

@@ -1,0 +1,9 @@
+id: "shop.order"
+type: concept
+owner: "sys:shop"
+title: { ru: "Order", en: "Order" }
+summary: "A purchase with a total and a status."
+status: live
+min_tier: user
+ui_terms: ["Order"]
+code_terms: ["orders.service.ts"]

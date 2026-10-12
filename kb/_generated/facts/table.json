@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "file": "apps/api/src/db/schema.ts",
+      "id": "table:orders",
+      "symbol": "orders",
+      "table": "orders"
+    }
+  ],
+  "kind": "table"
+}

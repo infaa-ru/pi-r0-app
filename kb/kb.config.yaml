@@ -1,0 +1,149 @@
+# Synthetic multi-repository fixture: `app` (home) and `contracts`. Local path of `contracts` comes from PI_REPO_PATHS.
+version: 1
+
+repositories:
+  - { id: app, home: true, role: product }
+  - { id: contracts, role: contracts }
+
+tiers: [user, support, internal, restricted]
+
+kinds: [product, cross-domain, platform, operations]
+platform_layers: [business, technical]
+
+statuses:
+  live: user
+  legacy-surface: support
+  backend-only: support
+  planned: internal
+  deprecated: internal
+
+scopes: [workspace]
+
+surfaces: [web.shop, api]
+
+lifecycle_stages: [draft, published]
+
+directions:
+  - { id: shop, title: "Shop" }
+
+relation_types: [part_of, owns, requires, produces, consumes, triggers, uses, administers]
+uses_target_kinds: [platform, cross-domain]
+
+node_prefixes:
+  sys: system
+  sub: subsystem
+  cap: capability
+  concept: concept
+  flow: flow
+
+fact_prefixes: [perm, role, table, ui, api]
+pending_fact_prefixes: []
+
+directives:
+  user: [sys, sub, cap, concept, flow, role]
+  support: [sys, sub, cap, concept, flow, role, perm, ui, api]
+  internal: [sys, sub, cap, concept, flow, role, perm, ui, api, table, code, test]
+  restricted: [sys, sub, cap, concept, flow, role, perm, ui, api, table, code, test]
+
+labels:
+  roles:
+    owner: Owner
+    viewer: Viewer
+
+doc_sections:
+  capability:
+    user: ["What it is", "How to do it"]
+    support: ["Scenarios", "Errors"]
+    internal: ["Code", "Tests"]
+  concept:
+    user: ["What it is"]
+    internal: ["Code"]
+  system:
+    user: ["What it does"]
+  flow:
+    user: ["In short"]
+    internal: ["Chain"]
+
+planned_doc_sections:
+  capability:
+    internal: ["What is planned"]
+
+doc_files:
+  user.md: user
+  support.md: support
+  internal.md: internal
+  restricted.md: restricted
+
+permissions:
+  definitions: apps/api/src/access/permissions.ts
+  roles: apps/api/src/access/role-permissions.ts
+  web: apps/web-v2/src/features/order-list/index.tsx
+
+adapters:
+  - id: nextjs
+    options:
+      src_root: apps/web-v2/src
+      structure: fsd
+      layers: [features]
+      shell_slices: [widgets/app-shell]
+      shared_ui_dirs: [shared/ui, shared/ui-kit]
+      navigation_file: shared/config/project-navigation.ts
+      action_adapters_dir: features/kb-assistant/actions/adapters
+      entities_dir: entities
+      conventions_heading: Общие конвенции
+  - { id: ts-enums, options: { source_root: packages/shared/src, prefix: shared } }
+  - { id: pnpm-vitest, options: { packages: { api: { name: "@fixture/api", exclude: ["**/*.integration.test.ts"] } } } }
+
+code_roots:
+  web: apps/web-v2
+  api: apps/
+
+delivery:
+  targets:
+    - { name: web-docs, tier: user, kind: docs, path: apps/web-v2/src/shared/kb/generated/docs.user.json }
+    - { name: web-help, tier: user, kind: help, path: apps/web-v2/src/shared/kb/generated/help.user.json }
+    - { name: web-actions, tier: user, kind: actions, path: apps/web-v2/src/shared/kb/generated/actions.user.json }
+    - { name: api-corpus, tier: user, kind: corpus, path: apps/api/src/modules/kb-assistant/generated/corpus.user.json }
+    - { name: api-denylist, tier: user, kind: denylist, path: apps/api/src/modules/kb-assistant/generated/denylist.user.json }
+
+doc_headings:
+  tests: Tests
+  cascade: What can run next
+
+extractors:
+  - { id: fixture, runner: node, script: tools/extract-facts.mjs }
+
+fact_sources:
+  extractors: ["tools/**"]
+  categories:
+    routes: ["apps/api/src/**/*.routes.ts"]
+    permissions: ["apps/api/src/access/*.ts"]
+    tables: ["apps/api/src/db/**"]
+    ui: ["apps/web-v2/src/app/**"]
+
+coverage:
+  api:
+    root: apps/api/src
+    include: ["apps/api/src/**/*.ts"]
+    exclude: []
+  web:
+    root: apps/web-v2/src
+    layers: [features]
+  capabilities:
+    run_types: false
+    action_routes: [shop]
+
+graph_drift:
+  composition_roots: [apps/api/src/app.ts]
+  exclude: ["**/*.test.ts"]
+
+leak:
+  user:
+    deny_fact_kinds: [perm, table, api]
+    deny_patterns: ['apps/', 'packages/', '\.tsx?\b', 'KBC-(support|internal|restricted)-']
+  support:
+    deny_fact_kinds: [table]
+    deny_patterns: ['apps/', 'packages/', '\.tsx?\b', 'KBC-(internal|restricted)-']
+  internal:
+    deny_fact_kinds: []
+    deny_patterns: ['KBC-restricted-']

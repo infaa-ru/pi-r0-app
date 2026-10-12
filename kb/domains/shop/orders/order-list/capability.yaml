@@ -1,0 +1,21 @@
+id: "shop.orders.order-list"
+type: capability
+part_of: "sub:shop.orders"
+title: { ru: "See orders", en: "See orders" }
+summary: "List the orders of a shop with their status."
+intents: ["my orders"]
+status: live
+min_tier: user
+entitlements:
+  view: ["perm:orders.view"]
+entry:
+  ui: { route: "ui:/orders" }
+  api:
+    - { op: "api:GET /shops/:shopId/orders", role: execute }
+relations:
+  consumes:
+    - { to: "concept:shop.order" }
+agent:
+  actions:
+    - { kind: explain }
+    - { kind: navigate, target: entry.ui }

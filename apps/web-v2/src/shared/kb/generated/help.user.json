@@ -1,0 +1,10 @@
+{
+  "/orders": [
+    {
+      "path": "/docs/shop/orders/order-list",
+      "ref": "cap:shop.orders.order-list",
+      "summary": "List the orders of a shop with their status.",
+      "title": "See orders"
+    }
+  ]
+}

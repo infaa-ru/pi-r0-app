@@ -1,0 +1,80 @@
+{
+  "docs": {
+    "cap:shop.orders.order-list": {
+      "markdown": "# See orders\n\n## What it is\n\nThe orders page lists every order with its status.\n\n## How to do it\n\nOpen the orders page.",
+      "partOf": "sub:shop.orders",
+      "path": "/docs/shop/orders/order-list",
+      "ref": "cap:shop.orders.order-list",
+      "related": [
+        {
+          "path": "/docs/concepts/shop/order",
+          "ref": "concept:shop.order",
+          "rel": "consumes",
+          "title": "Order"
+        }
+      ],
+      "summary": "List the orders of a shop with their status.",
+      "title": "See orders",
+      "type": "capability"
+    },
+    "concept:shop.order": {
+      "markdown": "# Order\n\n## What it is\n\nA purchase with a total and a status.",
+      "partOf": "sys:shop",
+      "path": "/docs/concepts/shop/order",
+      "ref": "concept:shop.order",
+      "related": [],
+      "summary": "A purchase with a total and a status.",
+      "title": "Order",
+      "type": "concept"
+    },
+    "sys:shop": {
+      "markdown": "# Shop\n\n## What it does\n\nShows the orders of your shop and lets you place new ones. See [«See orders»](/docs/shop/orders/order-list).",
+      "partOf": null,
+      "path": "/docs/shop",
+      "ref": "sys:shop",
+      "related": [],
+      "summary": "Orders of a shop; the API contract lives in the contracts repository.",
+      "title": "Shop",
+      "type": "system"
+    }
+  },
+  "nav": {
+    "flows": [],
+    "systems": [
+      {
+        "concepts": [
+          {
+            "hasDoc": true,
+            "path": "/docs/concepts/shop/order",
+            "ref": "concept:shop.order",
+            "title": "Order",
+            "type": "concept"
+          }
+        ],
+        "hasDoc": true,
+        "path": "/docs/shop",
+        "ref": "sys:shop",
+        "subsystems": [
+          {
+            "hasDoc": false,
+            "nodes": [
+              {
+                "hasDoc": true,
+                "path": "/docs/shop/orders/order-list",
+                "ref": "cap:shop.orders.order-list",
+                "title": "See orders",
+                "type": "capability"
+              }
+            ],
+            "path": "/docs/shop/orders",
+            "ref": "sub:shop.orders",
+            "title": "Orders",
+            "type": "subsystem"
+          }
+        ],
+        "title": "Shop",
+        "type": "system"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+registry: work
+tier: internal
+id_prefix: T
+frontmatter:
+  id: work.registry
+  doc_type: work
+  owners: [fixture-team]
+preamble: |-
+  # Work registry (R0 sandbox)
+
+  Edit via the CLI, never this file.
+epics:
+  - id: E-01
+    title: Contract change
+    goal: Deliver one change across app and contracts
+    area: shop
+    where: []
+    status: open
+tasks:
+  - id: T-001
+    title: Add the returned status to the orders contract and handle it in the app
+    type: feature
+    priority: P2
+    status: ready
+    area: shop
+    where: [cap:shop.orders.order-list]
+    findings: []
+    depends_on: []
+    decisions: [The status list lives in the contracts repository; the app only handles the new value]
+    leaves_open: []
+    updated_on: 2026-10-06
+    epic: E-01

@@ -1,0 +1,23 @@
+registry: product
+tier: internal
+id_prefix: F
+frontmatter:
+  id: findings.product
+  doc_type: findings
+  owners: [fixture-team]
+preamble: |-
+  # Product findings (R0 sandbox)
+
+  Synthetic registry of the R0 sandbox.
+sections:
+  - id: shop
+    title: Shop
+    findings:
+      - id: F-001
+        type: debt
+        area: shop.orders
+        priority: P3
+        summary: The orders contract has no cancelled-order example
+        where: [cap:shop.orders.order-list]
+        source: fixture walkthrough
+        status: open

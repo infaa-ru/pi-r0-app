@@ -1,0 +1,10 @@
+id: "shop.orders"
+type: subsystem
+part_of: "sys:shop"
+title: { ru: "Orders", en: "Orders" }
+summary: "Listing and placing orders."
+direction: shop
+status: live
+min_tier: user
+code:
+  api: ["apps/api/src/orders/**", "contracts:src/contract/**"]

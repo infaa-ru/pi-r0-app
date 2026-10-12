@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "file": "apps/web-v2/src/app/admin/page.tsx",
+      "group": "admin",
+      "id": "ui:/admin",
+      "nav": "admin",
+      "navId": "admin-home",
+      "route": "/admin"
+    },
+    {
+      "file": "apps/web-v2/src/app/orders/page.tsx",
+      "group": "orders",
+      "id": "ui:/orders",
+      "route": "/orders"
+    }
+  ],
+  "kind": "ui"
+}

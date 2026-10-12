@@ -1,0 +1,18 @@
+id: shop
+type: system
+kind: product
+title: { ru: "Shop", en: "Shop" }
+summary: "Orders of a shop; the API contract lives in the contracts repository."
+status: live
+min_tier: user
+scope: [workspace]
+surfaces:
+  - { surface: "web.shop" }
+code:
+  web_routes: ["/orders", "/admin"]
+  admin_nav: ["admin-*"]
+  permissions: ["orders.*"]
+  web: ["apps/web-v2/src/features/order-list"]
+  api: ["apps/api/src/**"]
+subsystems: [orders]
+owners: ["fixture-team"]

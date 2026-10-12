@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "id": "role:owner",
+      "permissionCount": 2,
+      "role": "owner",
+      "scope": "workspace"
+    },
+    {
+      "id": "role:viewer",
+      "permissionCount": 1,
+      "role": "viewer",
+      "scope": "workspace"
+    }
+  ],
+  "kind": "role"
+}

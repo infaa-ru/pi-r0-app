@@ -1,0 +1,139 @@
+{
+  "catalog": [
+    {
+      "entitlements": {
+        "view": [
+          "perm:orders.view"
+        ]
+      },
+      "entryUi": {
+        "pattern": "/orders",
+        "route": "ui:/orders"
+      },
+      "partOf": "sub:shop.orders",
+      "ref": "cap:shop.orders.order-list",
+      "status": "live",
+      "summary": "List the orders of a shop with their status.",
+      "title": "See orders",
+      "type": "capability"
+    },
+    {
+      "entitlements": {
+        "execute": [
+          "perm:orders.place"
+        ],
+        "view": [
+          "perm:orders.view"
+        ]
+      },
+      "entryUi": null,
+      "partOf": "sub:shop.orders",
+      "ref": "cap:shop.orders.order-place",
+      "status": "live",
+      "summary": "Create an order with a total.",
+      "title": "Place an order",
+      "type": "capability"
+    },
+    {
+      "entitlements": {},
+      "entryUi": null,
+      "partOf": "sys:shop",
+      "ref": "concept:shop.order",
+      "status": "live",
+      "summary": "A purchase with a total and a status.",
+      "title": "Order",
+      "type": "concept"
+    },
+    {
+      "entitlements": {},
+      "entryUi": null,
+      "partOf": "sys:shop",
+      "ref": "sub:shop.orders",
+      "status": "live",
+      "summary": "Listing and placing orders.",
+      "title": "Orders",
+      "type": "subsystem"
+    },
+    {
+      "entitlements": {},
+      "entryUi": null,
+      "partOf": null,
+      "ref": "sys:shop",
+      "status": "live",
+      "summary": "Orders of a shop; the API contract lives in the contracts repository.",
+      "title": "Shop",
+      "type": "system"
+    }
+  ],
+  "chunks": [
+    {
+      "id": "kb/domains/shop/concepts/order/user.md#",
+      "node": "concept:shop.order",
+      "text": "# Order",
+      "title": ""
+    },
+    {
+      "id": "kb/domains/shop/concepts/order/user.md#what-it-is",
+      "node": "concept:shop.order",
+      "text": "A purchase with a total and a status.",
+      "title": "What it is"
+    },
+    {
+      "id": "kb/domains/shop/orders/order-list/user.md#",
+      "node": "cap:shop.orders.order-list",
+      "text": "# See orders",
+      "title": ""
+    },
+    {
+      "id": "kb/domains/shop/orders/order-list/user.md#what-it-is",
+      "node": "cap:shop.orders.order-list",
+      "text": "The orders page lists every order with its status.",
+      "title": "What it is"
+    },
+    {
+      "id": "kb/domains/shop/orders/order-list/user.md#how-to-do-it",
+      "node": "cap:shop.orders.order-list",
+      "text": "Open the orders page.",
+      "title": "How to do it"
+    },
+    {
+      "id": "kb/domains/shop/user.md#",
+      "node": "sys:shop",
+      "text": "# Shop",
+      "title": ""
+    },
+    {
+      "id": "kb/domains/shop/user.md#what-it-does",
+      "node": "sys:shop",
+      "text": "Shows the orders of your shop and lets you place new ones. See «See orders».",
+      "title": "What it does"
+    }
+  ],
+  "edges": [
+    {
+      "from": "cap:shop.orders.order-list",
+      "rel": "consumes",
+      "to": "concept:shop.order"
+    },
+    {
+      "from": "cap:shop.orders.order-list",
+      "rel": "part_of",
+      "to": "sub:shop.orders"
+    },
+    {
+      "from": "cap:shop.orders.order-place",
+      "rel": "part_of",
+      "to": "sub:shop.orders"
+    },
+    {
+      "from": "cap:shop.orders.order-place",
+      "rel": "produces",
+      "to": "concept:shop.order"
+    },
+    {
+      "from": "sub:shop.orders",
+      "rel": "part_of",
+      "to": "sys:shop"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "perm:orders.place",
+      "key": "orders.place",
+      "roles": [
+        "owner"
+      ]
+    },
+    {
+      "id": "perm:orders.view",
+      "key": "orders.view",
+      "roles": [
+        "owner",
+        "viewer"
+      ]
+    }
+  ],
+  "kind": "perm"
+}
