@@ -1,1 +1,1 @@
-export const PERMISSIONS = ['orders.view', 'orders.place'] as const
+export const PERMISSIONS = ['orders.view', 'orders.place', 'orders.return'] as const
